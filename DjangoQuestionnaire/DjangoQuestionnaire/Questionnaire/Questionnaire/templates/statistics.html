@@ -1,0 +1,23 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+  Ліки
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+  {% if statistics %}
+
+    {% for statistic in statistics %}
+  <div  class="alert alert-info mt2">
+      <h4>{{statistic}}</h4>
+  </div>
+    {% endfor %}
+
+{% endif %}
+</div>
+{% endblock %}
+

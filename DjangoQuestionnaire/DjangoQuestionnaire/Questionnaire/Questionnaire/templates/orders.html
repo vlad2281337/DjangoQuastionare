@@ -1,0 +1,31 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+  Ліки
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+  {% if medicals %}
+
+    {% for order in orders %}
+  <div  class="alert alert-info mt2">
+        {% if user == order.user %}
+      <h3>{{order.medical.name}}</h3>
+      <h4>{{order.medical.description|linebreaks}}</h4>
+      {% if order.medical.reception %}
+        <h4>Відпускається за рецептом</h4>
+      {% else %}
+        <h4>Відпускається без рецепту</h4>
+      {% endif %}
+        {% endif %}
+  </div>
+    {% endfor %}
+
+
+</div>
+{% endblock %}
+

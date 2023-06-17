@@ -1,0 +1,56 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+  Головна
+{% endblock %}
+
+
+
+{% block content %}
+
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title">РЕЗУЛЬТАТИ ПРИЙОМУ</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+
+					<form method="POST" action="">
+                               {% csrf_token %}
+						<div class="input-group mb-3">
+                            {{form.symptoms}}
+						</div>
+						<div class="input-group mb-3">
+                            {{form.diagnosys}}
+						</div>
+						<div class="input-group mb-2">
+							{{form.time}}
+						</div>
+						<div class="input-group mb-2">
+							{{form.recomendations}}
+						</div>
+
+				   		<div class="d-flex justify-content-center mt-3 login_container">
+				 			<input class="btn login_btn" type="submit" value="Додати">
+				   		</div>
+					</form>
+				</div>
+					{{form.errors}}
+			</div>
+		</div>
+	</div>
+	<script>
+
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Симптоми..';
+		form_fields[2].placeholder='Діагноз..';
+		form_fields[3].placeholder='Рекомендації..';
+
+
+		for (var field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+	</script>
+{% endblock %}
+

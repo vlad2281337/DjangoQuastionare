@@ -1,0 +1,10 @@
+cd DjangoQuestionnaire
+
+
+cd DjangoQuestionnaire
+
+
+cd Questionnaire
+
+
+python manage.py runserver

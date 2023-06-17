@@ -1,0 +1,58 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+  Пошук
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+  {% if appointments %}
+
+    {% for appointment in appointments %}
+  <div  class="alert alert-info mt2">
+        {% if user.role == 2 %}
+       <h3>{{appointment.doctor.user.get_full_name}}</h3>
+       <h4>{{appointment.doctor.specialization}}</h4>
+        {% endif %}
+
+        {% if user.role == 1 %}
+      <h3>{{appointment.patietn.get_full_name}}</h3>
+      {% endif %}
+       <h5>{{appointment.date}}</h5>
+       <h5>{{appointment.time}}</h5>
+    <h5>Причина звернення: {{appointment.complains|linebreaks}}</h5>
+    <h5>Симптоматика: {{appointment.symptoms|linebreaks}}</h5>
+    <h5>Діагноз: {{appointment.diagnosys|linebreaks}}</h5>
+    <h5>Рекомендації: {{appointment.recomendations|linebreaks}}</h5>
+          <br>
+      {% if user.role == 1 %}
+      <a href="{% url 'detail_appointment' appointment.id %}" class="btn btn-success">Додати результати прийому</a>
+      {% endif %}
+      {% if user.role == 2 %}
+      <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-success">Скасувати прийом</a>
+      {% endif %}
+
+  </div>
+    {% endfor %}
+
+  {% else %}
+    {% if user.is_superuser %}
+          <h3> В системі ще немає жодного запису! </h3>
+    {% else %}
+    {% if user.role == 2 %}
+  <h3> Ви ще не були записані на жодний прийом! </h3>
+    {% endif %}
+   {% if user.role == 1 %}
+  <h3> До вас ще не був записаний жодний пацієнт! </h3>
+    {% endif %}
+  {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}
+

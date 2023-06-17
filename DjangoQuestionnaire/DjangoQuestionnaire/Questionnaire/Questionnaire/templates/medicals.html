@@ -1,0 +1,30 @@
+{%  extends 'base.html' %}
+
+{% block title %}
+  Ліки
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+  {% if medicals %}
+
+    {% for medical in medicals %}
+  <div  class="alert alert-info mt2">
+     <h3>{{medical.name}}</h3>
+      <h4>{{medical.description|linebreaks}}</h4>
+      {% if medical.reception %}
+        <h4>Відпускається за рецептом</h4>
+      {% else %}
+        <h4>Відпускається без рецепту</h4>
+      {% endif %}
+      <a href="{% url 'order' medical.name %}" class="btn btn-success">Замовити</a>
+  </div>
+    {% endfor %}
+
+{% endif %}
+</div>
+{% endblock %}
+
